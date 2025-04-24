@@ -12,7 +12,7 @@ properties:
     registries:
       - server: <ACR_LOGIN_SERVER>
         username: <ACR_USERNAME>
-        passwordSecretRef: acr-pwd
+        password: <ACR_PASSWORD>
   template:
     containers:
       - name: csharp-container
@@ -27,6 +27,3 @@ properties:
         - name: http-scaling
           http:
             concurrentRequests: 50
-secrets:
-  - name: acr-pwd
-    value: <ACR_PASSWORD>

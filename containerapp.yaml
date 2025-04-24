@@ -1,6 +1,6 @@
-name: my-container-app
+name: csharp-container
 type: Microsoft.App/containerApps
-location: eastus
+location: japaneast
 properties:
   environmentId: /subscriptions/25cc9009-2580-4987-936c-95aaab093023/resourceGroups/acadev/providers/Microsoft.App/managedEnvironments/academoenv
   configuration:

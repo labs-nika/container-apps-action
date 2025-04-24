@@ -30,10 +30,13 @@ jobs:
           docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }} ./src
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Replace image tag in containerapp.yaml
+      - name: Replace variables in containerapp.yaml
         run: |
-          sed -i "s|<ACR_LOGIN_SERVER>/<IMAGE_NAME>:<TAG>|${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}|g" ${{ github.workspace }}/containerapp.yaml
-
+          sed -i "s|<ACR_LOGIN_SERVER>|${{ secrets.ACR_LOGIN_SERVER }}|g" ${{ github.workspace }}/containerapp.yaml
+          sed -i "s|<ACR_USERNAME>|${{ secrets.ACR_USERNAME }}|g" ${{ github.workspace }}/containerapp.yaml
+          sed -i "s|<ACR_PASSWORD>|${{ secrets.ACR_PASSWORD }}|g" ${{ github.workspace }}/containerapp.yaml
+          sed -i "s|<IMAGE_NAME>|${{ secrets.IMAGE_NAME }}|g" ${{ github.workspace }}/containerapp.yaml
+          sed -i "s|<TAG>|${{ github.sha }}|g" ${{ github.workspace }}/containerapp.yaml
       - name: Deploy Container App using YAML
         uses: azure/container-apps-deploy-action@v1
         with:

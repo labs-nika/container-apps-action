@@ -10,9 +10,12 @@ properties:
       targetPort: 8080
       transport: auto
     registries:
-      - passwordSecretRef: <ACR_PASSWORD>
+      - passwordSecretRef: acr-pwd
         server: <ACR_LOGIN_SERVER>
         username: <ACR_USERNAME>
+    secrets:
+      - name: acr-pwd
+        value: <ACR_PASSWORD>
   template:
     containers:
       - name: csharp-container
@@ -26,4 +29,5 @@ properties:
       rules:
         - name: http-scaling
           http:
-            concurrentRequests: 50
+            metadata:
+              concurrentRequests: 50

@@ -37,8 +37,11 @@ jobs:
           sed -i "s|<ACR_PASSWORD>|${{ secrets.ACR_PASSWORD }}|g" ${{ github.workspace }}/containerapp.yaml
           sed -i "s|<IMAGE_NAME>|${{ secrets.IMAGE_NAME }}|g" ${{ github.workspace }}/containerapp.yaml
           sed -i "s|<TAG>|${{ github.sha }}|g" ${{ github.workspace }}/containerapp.yaml
+          echo "Updated containerapp.yaml with ACR credentials and image name"
+          cat ${{ github.workspace }}/containerapp.yaml
       - name: Deploy Container App using YAML
         uses: azure/container-apps-deploy-action@v1
         with:
           resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+          name: csharp-container
           yamlConfigPath: ${{ github.workspace }}/containerapp.yaml

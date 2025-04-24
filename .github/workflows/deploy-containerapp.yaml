@@ -37,5 +37,4 @@ jobs:
       - name: Deploy Container App using YAML
         uses: azure/container-apps-deploy-action@v1
         with:
-          resourceGroup: my-container-app-rg
           yamlConfigPath: ${{ github.workspace }}/containerapp.yaml

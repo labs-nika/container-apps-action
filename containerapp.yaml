@@ -2,11 +2,11 @@ name: my-container-app
 type: Microsoft.App/containerApps
 location: eastus
 properties:
-  environmentId: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/my-container-app-rg/providers/Microsoft.App/managedEnvironments/<YOUR_ACA_ENV_NAME>
+  environmentId: /subscriptions/25cc9009-2580-4987-936c-95aaab093023/resourceGroups/acadev/providers/Microsoft.App/managedEnvironments/academoenv
   configuration:
     ingress:
       external: true
-      targetPort: 80
+      targetPort: 8080
       transport: auto
     registries:
       - server: <ACR_LOGIN_SERVER>

@@ -42,4 +42,5 @@ jobs:
         uses: azure/container-apps-deploy-action@v1
         with:
           resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+          containerAppName: csharp-container
           yamlConfigPath: ${{ github.workspace }}/containerapp.yaml

@@ -1,0 +1,31 @@
+name: my-container-app
+type: Microsoft.App/containerApps
+location: eastus
+properties:
+  environmentId: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/my-container-app-rg/providers/Microsoft.App/managedEnvironments/<YOUR_ACA_ENV_NAME>
+  configuration:
+    ingress:
+      external: true
+      targetPort: 80
+      transport: auto
+    registries:
+      - server: <ACR_LOGIN_SERVER>
+        username: <ACR_USERNAME>
+        passwordSecretRef: acr-pwd
+  template:
+    containers:
+      - name: sample-container
+        image: <ACR_LOGIN_SERVER>/<IMAGE_NAME>:<TAG>
+        resources:
+          cpu: 0.5
+          memory: 1.0Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 5
+      rules:
+        - name: http-scaling
+          http:
+            concurrentRequests: 50
+secrets:
+  - name: acr-pwd
+    value: <ACR_PASSWORD>

@@ -10,9 +10,9 @@ properties:
       targetPort: 8080
       transport: auto
     registries:
-      - server: <ACR_LOGIN_SERVER>
+      - passwordSecretRef: <ACR_PASSWORD>
+        server: <ACR_LOGIN_SERVER>
         username: <ACR_USERNAME>
-        password: <ACR_PASSWORD>
   template:
     containers:
       - name: csharp-container
